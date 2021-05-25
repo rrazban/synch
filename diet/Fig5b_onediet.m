@@ -9,9 +9,9 @@ function Fig5b_onediet(method,which,num_regions)
 
 
 if which=='ket' | which=='std'
-    [Lam,vdata,T]=readin_diet(method,which,num_regions);
+    [Lam,vdata,T,~]=readin_diet(method,which,num_regions);
 elseif which=='glc' | which=='bhb'
-    [Lam,vdata,T]=readin_bolus(which);
+    [Lam,vdata,T,~]=readin_bolus(which);
 end
 
 

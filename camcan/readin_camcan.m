@@ -41,7 +41,8 @@ for s=1:TOTAL_SUBS
         Tage=size(raw_data,1);
         if Tage==correct_Tage     %make sure time always the same       
             [Lamage(s),vage(s)] = Fit_Ising(raw_data);
-
+            %[Lamage(s),vage(s)] = Fit_Ising_plot_distr(raw_data,ages(s));
+            
             Sub_Ages(s)=ages(s);
             Age_Data{1,end+1}=raw_data; %needed for Fig 4c
         else

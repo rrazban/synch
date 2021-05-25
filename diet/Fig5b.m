@@ -1,12 +1,12 @@
 function Fig5b(method,num_regions)
-%% Lambda differences for individual subjects under ketogenic or glycolitic
+%% Lambda differences for individual subjects under ketogenic or glycolytic
 %diet (Figure 5b)
 %methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 %num_regions: 1 to 498
 
 
-[Lamglu,vglu,T]=readin_diet(method,'std',num_regions);
-[Lamket,vket,T]=readin_diet(method,'ket',num_regions);
+[Lamglu,vglu,T,~]=readin_diet(method,'std',num_regions);
+[Lamket,vket,T,~]=readin_diet(method,'ket',num_regions);
 
 %[Lamglu,vglu,N,T]=readin_bolus('glc');
 %[Lamket,vket,N,T]=readin_bolus('bhb');

@@ -1,15 +1,15 @@
-function [Lamdiet,vdiet,correct_T]=readin_diet(method,diet,num_regions)
+function [Lamdiet,vdiet,correct_T,Data]=readin_diet(method,diet,num_regions)
 
 DIR = 'synchrony/'; %path to the repo from pwd, *set this appropriately*
 
 prep_method = strcat(DIR,'/fmri_data/diet/time_series_498_',method);
 
 subs = {'001','002','005','019','022','027','028','031','032','034','036','038'};
-%subs = {'034'};%the outlier
 TOTAL_SUBS = size(subs,2);
 
 Lamdiet = ones(1,TOTAL_SUBS);
 vdiet = ones(TOTAL_SUBS,1);
+Data = {};
 
 keySet = {'regular','gs','acompcor15','new_wmcsf'};
 valueSet = [740 740 730 730];
@@ -29,12 +29,14 @@ for s=1:TOTAL_SUBS
 
     if isfile(filename)
         raw_data=readmatrix(filename);
-        raw_data=raw_data(:,rois);
+        if num_regions~=498       %important to keep original region numbering for indentify_diet
+            raw_data=raw_data(:,rois);
+        end
         
         Tage=size(raw_data,1); 
         if Tage==correct_T     %make sure time always the same       
             [Lamdiet(s),vdiet(s)] = Fit_Ising(raw_data);
-            
+            Data{1,end+1}=raw_data;
         else
             disp(strcat(sub,' has incorrect time series length'))
         end
