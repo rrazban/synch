@@ -1,10 +1,10 @@
-function Fig4c(method,num_regions)
+function int_seg(method,num_regions)
 %% Find Int and Seg and find their ratios vs Lambda (Figure 4c)
 %methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 %num_regions: 1 to 498
 
 
-[lamage,vage,Sub_Ages,T,Age_Data]=readin_camcan(method,num_regions);
+[lamage,~,~,T,Age_Data]=readin_camcan(method,num_regions);
 N=num_regions;
 TOTAL = size(lamage,2);
 
@@ -30,7 +30,7 @@ Ind_Seg=All_Age_data((abs(BAge_reshaped)==0),:);
 Seg=corrcoef(Ind_Seg);
 Seg=Seg-eye(N,N);
 Seg=Seg/sqrt(sum(sum(Seg.^2)));  
-Ind_Int=All_Age_data((abs(BAge_reshaped)>=1/2),:);
+Ind_Int=All_Age_data((abs(BAge_reshaped)>=1/2),:);  %change 1/2 threshold to see how it changes cross over point
 Int=corrcoef(Ind_Int);
 Int=Int-eye(N,N);
 Int=Int/sqrt(sum(sum(Int.^2)));
@@ -53,24 +53,43 @@ for i=1:TOTAL
     pseg(i)=(psegi-pinti*cov_Seg_Int)/(1-cov_Seg_Int^2);
 end
 
-
 pint=pint./(pint+pseg);
 pseg=1-pint;
 
 
-figure
+%% Plot the figure
+plot_figure_4c
 
-title(strcat(method,', ', string(num_regions), ' regions'))
-xlabel('\Lambda')
-hold on
-yyaxis left
-ylim([0 1])
-scatter(lamage,pseg)
-ylabel('P_{seg}')
+function plot_figure_4c
 
-yyaxis right 
-ylim([0 1])
-scatter(lamage,pint)
-ylabel('P_{int}')
+    lightBlue = [66, 144, 245]/255; %custom
+    lightOrange = [235, 128, 52]/255;   %custom
+    %title(strcat(method,', ', string(num_regions), ' regions'))
+    xlabel('\Lambda')
+    xticks([-0.4 -.2 0 0.2])
+    xlim([-0.3 0.3])
+    hold on
 
-hold off
+    yyaxis left
+    ylim([0 1])
+    cow=scatter(lamage,pseg);
+    cow.MarkerEdgeColor= [.2 .2 .2];
+    cow.MarkerFaceColor= lightBlue;
+    yticks([0 0.2 0.4 0.6 0.8 1])
+    ylabel('{\it P}_{seg}')
+
+    yyaxis right 
+    ylim([0 1])
+    cat=scatter(lamage,pint);
+    cat.MarkerEdgeColor= [.2 .2 .2];
+    %cat.MarkerFaceColor = [0.8500 0.3250 0.0980];
+    cat.MarkerFaceColor = lightOrange;
+    yticks([0 0.2 0.4 0.6 0.8 1])
+    ylabel('{\it P}_{int}')
+
+    hAxis=gca;
+    hAxis.LineWidth=1;
+    set(gcf,'units','inches','position',[2,2,8,4])
+    hold off
+end
+end
