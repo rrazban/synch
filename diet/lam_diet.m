@@ -1,15 +1,25 @@
-function Fig5b(method,num_regions)
+function lam_diet(method,num_regions)
 %% Lambda differences for individual subjects under ketogenic or glycolytic
 %diet (Figure 5b)
 %methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 %num_regions: 1 to 498
 
 
-[Lamglu,vglu,T,~]=readin_diet(method,'std',num_regions);
-[Lamket,vket,T,~]=readin_diet(method,'ket',num_regions);
+[Lamglu,m_glu,T,~]=readin_diet(method,'std',num_regions);
+[Lamket,m_ket,T,~]=readin_diet(method,'ket',num_regions);
 
-%[Lamglu,vglu,N,T]=readin_bolus('glc');
-%[Lamket,vket,N,T]=readin_bolus('bhb');
+vglu=m_glu(1,:);
+vket=m_ket(1,:);
+
+%[Lamglu,m_glu,~,~,~]=readin_bolus('glc',num_regions);
+%[Lamket,vket,Sub_Ages,T,~]=readin_bolus('bhb',num_regions);
+
+%thresh=50;
+%Lamglu = Lamglu(Sub_Ages<thresh);
+%vglu = vglu(Sub_Ages<thresh);
+
+%Lamket = Lamket(Sub_Ages<thresh);
+%vket = vket(Sub_Ages<thresh);
 
 TOTAL = size(Lamglu,2);
 
@@ -35,46 +45,11 @@ lamcrit=1/(2*num_regions);
 difErr=sqrt(Errg.^2+Errk.^2)/(lamcrit);  %standard error propagation for differences
                                          %rescaling was because of rescaling lambda->Lambda
                                                     
-
-
-%% Plot the figure
-
-[a,b]=sort(difLam,'descend'); %subjects are ordered by difLam
-
-h=figure;
-hold on
-hAxis=gca;
-
-bar(difLam(b));
-h1=errorbar(1:TOTAL,difLam(b),difErr(b));
-h1.Marker='.';
-h1.MarkerEdgeColor= [.2 .2 .2];
-h1.MarkerFaceColor=[.7 .7 .7];
-h1.LineStyle='None';
-h1.Color='k';
-h1.LineWidth=1;
-xlabel('Subjects')
-ylabel('\Lambda_{Ket}-\Lambda_{Glu}')
-%ylabel('\Lambda_{bhb}-\Lambda_{glc}')
-hAxis.TickLength=[.04 .04];
-hAxis.XMinorTick='off';
-hAxis.YMinorTick='off';
-hAxis.LineWidth=1;
-xticks([1:1:TOTAL])
-xticklabels({});
-h.Color=[1 1 1];
-title(strcat(method,', ', string(num_regions), ' regions'))
-
-
-% statistical Test
-
+%% statistical Test
 [pdiet,~,stats]=signrank(Lamglu,Lamket,'tail','left');       %Wilcoxon Sign-rank for diets
 magnitude = strcat('W = ', string(stats.signedrank));
 pvalue = strcat('p = ', sprintf('%.3f',pdiet));
-str = sprintf(strcat(magnitude, '\n', pvalue));
+sprintf(strcat(magnitude, '\n', pvalue))
 
-xL=xlim;
-yL=ylim;
-text(0.99*xL(2),0.99*yL(2),str,'HorizontalAlignment','right','VerticalAlignment','top')
-
-hold off
+%% Plot the figure
+plot_diet(difLam, difErr, TOTAL, pdiet)

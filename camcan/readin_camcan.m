@@ -1,4 +1,4 @@
-function [Lamage,vage,Sub_Ages,correct_Tage,Age_Data]=readin_camcan(method,num_regions)
+function [Lamage,moments,Sub_Ages,correct_Tage,Age_Data]=readin_camcan(method,num_regions)
 
 data_dir = strcat('/fmri_data/camcan/time_series_498_',method);
 
@@ -14,4 +14,4 @@ T_dict = containers.Map(keySet,valueSet);
 correct_Tage = T_dict(method);
 
 
-[Lamage,vage,Sub_Ages,Age_Data]=readin(data_dir,num_regions,subs,correct_Tage,ages,'N/A');
+[Lamage,moments,Sub_Ages,Age_Data]=readin(data_dir,num_regions,subs,correct_Tage,ages,'N/A');
