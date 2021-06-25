@@ -1,15 +1,21 @@
-function lam_diet(method,num_regions)
+function lam_bolus(num_regions)
 %% Lambda differences for individual subjects under ketogenic or glycolytic
-%diet
-%methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
+%diet (Figure 5b)
 %num_regions: 1 to 498
 
-
-[Lamglu,m_glu,~,~]=readin_diet(method,'std',num_regions);
-[Lamket,m_ket,T,~]=readin_diet(method,'ket',num_regions);
+[Lamglu,m_glu,~,~,~]=readin_bolus('glc',num_regions);
+[Lamket,m_ket,Sub_Ages,T,~]=readin_bolus('bhb',num_regions);
 
 vglu=m_glu(1,:);
 vket=m_ket(1,:);
+
+
+thresh=50;
+Lamglu = Lamglu(Sub_Ages<thresh);
+vglu = vglu(Sub_Ages<thresh);
+
+Lamket = Lamket(Sub_Ages<thresh);
+vket = vket(Sub_Ages<thresh);
 
 TOTAL = size(Lamglu,2);
 
@@ -42,4 +48,5 @@ pvalue = strcat('p = ', sprintf('%.3f',pdiet));
 sprintf(strcat(magnitude, '\n', pvalue))
 
 %% Plot the figure
+%plot_diet(difLam, difErr, TOTAL, pdiet, 'n/a', Sub_Ages)
 plot_diet(difLam, difErr, TOTAL, pdiet)
