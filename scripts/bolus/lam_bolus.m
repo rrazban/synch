@@ -1,5 +1,5 @@
 function lam_bolus(num_regions)
-%% Lambda differences for individual subjects under ketogenic or glycolytic
+%% Lambda differences for individual subjects under ketogenic and glycolytic
 %diet (Figure 5b)
 %num_regions: 1 to 498
 

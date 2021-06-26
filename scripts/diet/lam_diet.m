@@ -1,5 +1,5 @@
 function lam_diet(method,num_regions)
-%% Lambda differences for individual subjects under ketogenic or glycolytic
+%% Lambda differences for individual subjects under ketogenic and glycolytic
 %diet
 %methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 %num_regions: 1 to 498

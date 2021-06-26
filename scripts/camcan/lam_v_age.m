@@ -17,7 +17,7 @@ Qmed=zeros(1,N);
 
 for i=1:N
     q=find(Sub_Ages>=Edges(i)&Sub_Ages<Edges(i+1));          %calculates the medians and quartiles (error bars) of each age group 
-    sss=Lamage(q);                                              %^originally missing equal sign!! results unchanged (including pvalue) for 100 regions         
+    sss=Lamage(q);
     Qmed(i)=median(sss);
     Q25e(i)=Qmed(i)-quantile(sss,.25);
     Q75e(i)=quantile(sss,.75)-Qmed(i);
@@ -52,6 +52,7 @@ plot_figure_5a
         xlim([0.5 5.5])
         xticks([1:N])
         xticklabels({'25' '39' '53' '67' '81'})
+        
         %title(strcat(method,', ', string(num_regions), ' regions'))
         %title(strcat(string(num_regions), ' regions'))
         ylabel('\Lambda')

@@ -2,24 +2,29 @@ function identify_age(method)
 %% rank regions according to mean correlation difference between young and old
 %methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 
-[~,~,ages,~,Age_Data]=readin_camcan(method,498);
+num_regions=498;
+[~,~,ages,T,Age_Data]=readin_camcan(method,num_regions);
 
 TOTAL_SUBS = size(ages,1);
 
-mean_R_old = zeros(498);
-mean_R_young = zeros(498);
+mean_R_old = zeros(1,498);
+mean_R_young = zeros(1,498);
 num_old = 0;
 num_young = 0;
 
 for s=1:TOTAL_SUBS
     if ages(s)>64
-        R = corrcoef(Age_Data{s});
-        mean_R_old = mean_R_old+R;
+        %R = corrcoef(Age_Data{s});
+        Xnew= Isingify2(T,num_regions,Age_Data{s});
+        FC_per_region = sum(Xnew,1);
+        mean_R_old = mean_R_old+FC_per_region;
         num_old = num_old+1;
     
     elseif ages(s)<45
-        R = corrcoef(Age_Data{s});
-        mean_R_young = mean_R_young+R;
+        %R = corrcoef(Age_Data{s});
+        Xnew= Isingify2(T,num_regions,Age_Data{s});
+        FC_per_region = sum(Xnew,1);
+        mean_R_young = mean_R_young+FC_per_region;
         num_young = num_young+1;
     end        
 end
@@ -27,11 +32,8 @@ end
 mean_R_old = mean_R_old/num_old;
 mean_R_young = mean_R_young/num_young;
 
-difference_per_region=mean(mean_R_young-mean_R_old,1);%order of mean (before or after difference taken) does not seem to matter
+difference_per_region=mean_R_young-mean_R_old
 
-[val,indi] = maxk(difference_per_region, 498);
-%sort(indi(1:10))' %show the top ten
-%save('age45,64.mat','indi');  %save the ranking so that it can be used by readin
 
 ylabel('frequency');
 xlabel('difference of mean correlation per region');
