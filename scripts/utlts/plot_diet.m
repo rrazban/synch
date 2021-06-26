@@ -1,6 +1,8 @@
-function plot_diet(difLam, difErr, TOTAL, pdiet, which)
+function plot_diet(difLam, difErr, TOTAL, pdiet, which, ages)
     
 [a,b]=sort(difLam,'descend'); %subjects are ordered by difLam
+%[a,b]=sort(ages,'ascend');
+
 
 %h=figure;
 h=subplot(1,3,[2 3]);

@@ -75,7 +75,7 @@ function plot_figure_4c
     cow=scatter(lamage,pseg);
     cow.MarkerEdgeColor= [.2 .2 .2];
     cow.MarkerFaceColor= lightBlue;
-    yticks([0 0.2 0.4 0.6 0.8 1])
+    yticks([0 0.5 1])
     ylabel('{\it P}_{seg}')
 
     yyaxis right 
@@ -84,12 +84,16 @@ function plot_figure_4c
     cat.MarkerEdgeColor= [.2 .2 .2];
     %cat.MarkerFaceColor = [0.8500 0.3250 0.0980];
     cat.MarkerFaceColor = lightOrange;
-    yticks([0 0.2 0.4 0.6 0.8 1])
+    yticks([0 0.5 1])%[0 0.2 0.4 0.6 0.8 1]
     ylabel('{\it P}_{int}')
+    
 
     hAxis=gca;
     hAxis.LineWidth=1;
+    hAxis.FontSize = 20; 
     set(gcf,'units','inches','position',[2,2,8,4])
     hold off
+    
+    
 end
 end

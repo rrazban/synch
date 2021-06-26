@@ -3,7 +3,7 @@ function [Lam,moments,Sub_Ages,Data]=readin(data_dir,num_regions,subs,correct_T,
 DIR = 'synchrony/'; %path to the repo from pwd, *set this appropriately*
 %disp(['repository path from present working directory is currently: ', DIR])
 
-ranked_regions = load(strcat(DIR,'utlts/ranked_regions/mean_correlation/age45,64.mat'));%diet.mat
+ranked_regions = load(strcat(DIR,'scripts/utlts/ranked_regions/mean_correlation/age45,64.mat'));%diet.mat
 rois = ranked_regions.indi(1:num_regions);%num_regions chooses the top ranked regions
 %rois = randsample(1:498,num_regions);
 
@@ -57,3 +57,5 @@ end
 Lam(remove_sub) = [];
 Sub_Ages(remove_sub) = [];
 moments(:,remove_sub)=[];
+
+
