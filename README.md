@@ -12,3 +12,6 @@ To run the MATLAB scripts,
 2. Make sure that the `DIR` variable in `synchrony/scripts/utilts/readin.m` is correctly set. `DIR` corresponds to the path to `synchrony/` from your MATLAB's present working directory. 
 
 Scripts are partitioned based on the dataset they analyze. Further details on which figures in the paper the respective script reproduces can be found in comments at the top of the script.
+
+---
+Acknowledgements: initial version written by Corey Weistuch
