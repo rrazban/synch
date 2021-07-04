@@ -1,26 +1,21 @@
-function int_seg(method,num_regions)
+function int_seg(num_regions)
 %% Find Int and Seg and find their ratios vs Lambda (Figure 4c)
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 %num_regions: 1 to 498
 
 
-[lamage,~,~,T,Age_Data]=readin_camcan(method,num_regions);
+[lamage,~,~,T,Age_Data]=readin_camcan(num_regions);
 N=num_regions;
 TOTAL = size(lamage,2);
 
 All_Age_data=zeros((T-1)*TOTAL,N);
 BAge=zeros(T-1,TOTAL);
-Flip=ones(1,N);                                 %1 if we don't flip, -1 if we flip.  See Methods and XYZ.m
-%for i=1:15
- %   Flip(Flip_Ind(i))=-1;
-%end
 
 
 for i=1:TOTAL
     yy=Age_Data{i};
     yyn=Isingify2(length(yy(:,1)),N,yy);
-    All_Age_data((T-1)*(i-1)+1:(T-1)*(i-1)+T-1,:)=Flip.*yyn;
-	BAge(:,i)=sum(Flip.*yyn,2)/N;
+    All_Age_data((T-1)*(i-1)+1:(T-1)*(i-1)+T-1,:)=yyn;
+	BAge(:,i)=sum(yyn,2)/N;
 end
 
 BAge_reshaped=reshape(BAge,[(T-1)*TOTAL,1]);
@@ -43,7 +38,7 @@ pint=zeros(1,TOTAL);
 cov_Seg_Int=sum(sum(Seg.*Int));
 for i=1:TOTAL
     yy=Age_Data{i};
-    yyn=Flip.*Isingify2(length(yy(:,1)),N,yy);
+    yyn=Isingify2(length(yy(:,1)),N,yy);
     Ma=cov(yyn);
     Ma=Ma-diag(diag(Ma));
     Ma=Ma/sqrt((sum(sum(Ma.^2))));
@@ -64,7 +59,7 @@ function plot_figure_4c
 
     lightBlue = [66, 144, 245]/255; %custom
     lightOrange = [235, 128, 52]/255;   %custom
-    %title(strcat(method,', ', string(num_regions), ' regions'))
+    %title(strcat(string(num_regions), ' regions'))
     xlabel('\Lambda')
     xticks([-0.4 -.2 0 0.2])
     xlim([-0.3 0.3])

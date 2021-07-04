@@ -1,11 +1,10 @@
-function lam_accuracy(method,num_regions,which)
+function lam_accuracy(num_regions,which)
 %% mean(s^2) or var(s^2) as function of Lambda
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 %num_regions: 1 to 498
 %which= 'var' or 'mean' of s^2
 
 
-[Lam_fit,moments,~,~,~]=readin_camcan(method,num_regions);
+[Lam_fit,moments,~,~,~]=readin_camcan(num_regions);
 
 m2_data = moments(1,:);
 m4_data = moments(2,:);
@@ -29,6 +28,6 @@ end
 
 legend('data', 'theory')
 xlabel('\Lambda')
-title(strcat(method,', ', string(num_regions), ' regions'))
+title(strcat(string(num_regions), ' regions'))
 %hold off
 

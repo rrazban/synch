@@ -1,9 +1,8 @@
-function identify_diet(method)
+function identify_diet()
 %% rank regions according to mean correlation difference between young and old
-%methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 
-[~,~,~,Data_glu]=readin_diet(method,'std',498);
-[~,~,~,Data_ket]=readin_diet(method,'ket',498);
+[~,~,~,Data_glu]=readin_diet('std',498);
+[~,~,~,Data_ket]=readin_diet('ket',498);
 
 TOTAL_SUBS = size(Data_glu,2);
 

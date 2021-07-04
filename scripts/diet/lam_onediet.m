@@ -1,15 +1,14 @@
-function lam_onediet(method,which,num_regions)
+function lam_onediet(which,num_regions)
 %% Variant of Fig5b, instead of difference between glc and ket, shows 
 %individual lambda values per subject
 
-%methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 %which: 'ket', 'std'    %'std' corresponds to glycolytic diet
 %num_regions: 1 to 498
 
 
 
 if which=='ket' | which=='std'
-    [Lam,m_data,T,~]=readin_diet(method,which,num_regions);
+    [Lam,m_data,T,~]=readin_diet(which,num_regions);
 elseif which=='glc' | which=='bhb'  %method is not necessary here
     [Lam,m_data,Sub_Ages,T,~]=readin_bolus(which,num_regions);
 end
@@ -38,7 +37,4 @@ difErr=Err/(lamcrit); %rescaling was because of rescaling lambda->Lambda
 
 
 %% Plot the figure
-plot_diet(difLam, difErr, TOTAL, 1, which)   %pval does not make sense here so set to 1
-
-
-%ylabel(strcat('\Lambda_{',which,'}'))
+plot_diet(difLam, difErr, TOTAL, 1, which)   %pval does not make sense here so set arbitrarily to 1

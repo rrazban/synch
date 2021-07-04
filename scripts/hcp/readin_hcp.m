@@ -1,6 +1,6 @@
 function [Lamage,moments,Sub_Ages,correct_Tage,Age_Data]=readin_hcp(num_regions)
 
-data_dir = strcat('/fmri_data/hcp/3T/parcelled_498');
+data_dir = '/fmri_data/hcp/';
 
 info_file = 'info_hcp.txt';
 info = tdfread(info_file);
