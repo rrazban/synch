@@ -1,6 +1,5 @@
 function lam_v_age_hcp(num_regions)
 %% Lambda as a function of age (Figure 5a)
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 %num_regions: 1 to 498
 
 

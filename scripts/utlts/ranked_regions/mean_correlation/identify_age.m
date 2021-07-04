@@ -1,10 +1,8 @@
-function identify_age_ori(method)
+function identify_age()
 %% rank regions according to mean correlation difference between young and old
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 
-[~,~,ages,~,Age_Data]=readin_camcan(method,498);
-
-TOTAL_SUBS = size(ages,1);
+[~,~,ages,~,Age_Data]=readin_camcan(498);
+TOTAL_SUBS = size(ages,2);
 
 mean_R_old = zeros(498);
 mean_R_young = zeros(498);

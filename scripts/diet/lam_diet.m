@@ -1,12 +1,11 @@
-function lam_diet(method,num_regions)
+function lam_diet(num_regions)
 %% Lambda differences for individual subjects under ketogenic and glycolytic
 %diet
-%methods: 'regular', 'gs', 'acompcor15','new_wmcsf'
 %num_regions: 1 to 498
 
 
-[Lamglu,m_glu,~,~]=readin_diet(method,'std',num_regions);
-[Lamket,m_ket,T,~]=readin_diet(method,'ket',num_regions);
+[Lamglu,m_glu,~,~]=readin_diet('std',num_regions);
+[Lamket,m_ket,T,~]=readin_diet('ket',num_regions);
 
 vglu=m_glu(1,:);
 vket=m_ket(1,:);

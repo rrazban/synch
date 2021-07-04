@@ -1,7 +1,7 @@
 function [Lamdiet,vdiet,Sub_Ages,correct_T,Data]=readin_bolus(diet,num_regions)
 
+data_dir = '/fmri_data/bolus/';
 
-data_dir = '/fmri_data/bolus/parcelled_498';
 
 info_file = 'info_bolus.txt';
 info = tdfread(info_file);

@@ -1,7 +1,7 @@
 function [Lam,moments,Sub_Ages,Data]=readin(data_dir,num_regions,subs,correct_T,ages,diet)
 
 DIR = 'synchrony/'; %path to the repo from pwd, *set this appropriately*
-%disp(['repository path from present working directory is currently: ', DIR])
+disp(['repository path from present working directory is currently: ', DIR])
 
 ranked_regions = load(strcat(DIR,'scripts/utlts/ranked_regions/mean_correlation/age45,64.mat'));%diet.mat
 rois = ranked_regions.indi(1:num_regions);%num_regions chooses the top ranked regions
@@ -10,13 +10,13 @@ rois = ranked_regions.indi(1:num_regions);%num_regions chooses the top ranked re
 
 TOTAL_SUBS = length(subs);
 Lam = ones(1,TOTAL_SUBS);    
-moments = ones(4, TOTAL_SUBS); %m2 data, m4 data, m2 fit, m4 fit %note that m2 data = m2 fit by constructions
+moments = ones(4, TOTAL_SUBS); %m2 data, m4 data, m2 fit, m4 fit %note that m2 data = m2 fit by construction
 Sub_Ages = ones(1,TOTAL_SUBS);  %needed for readin_camcan and readin_bolus (does not apply to diet data)
 Data = {};
 
 remove_sub = [];
 
-for s=1:TOTAL_SUBS  %have this read in from a utilits fxn (readin.m), pass an empty list for diet for ages%also allows you to set DIR once!
+for s=1:TOTAL_SUBS
     sub = subs{s};
     if diet=='ket' | diet=='std'
         filename = strcat(DIR,data_dir,'/sub-',sub,'_ses-',diet,'.csv');%diet=ket,std

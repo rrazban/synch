@@ -1,9 +1,8 @@
-function FC_distribution(method)
+function FC_distribution()
 %% plot average functional connectivity across all camcan (Figure S2)
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 
 num_regions=498;
-[~,~,ages,T,Age_Data]=readin_camcan(method,num_regions);
+[~,~,ages,T,Age_Data]=readin_camcan(num_regions);
 
 TOTAL_SUBS = size(ages,1);
 

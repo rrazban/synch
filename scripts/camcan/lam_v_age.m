@@ -1,10 +1,9 @@
-function lam_v_age(method,num_regions)
+function lam_v_age(num_regions)
 %% Lambda as a function of age (Figure 5a)
-%methods: 'wmcsf','gs','wmcsfextra','wmcsfextra2','anar'
 %num_regions: 1 to 498
 
 
-[Lamage,~,Sub_Ages,~,~]=readin_camcan(method,num_regions);
+[Lamage,~,Sub_Ages,~,~]=readin_camcan(num_regions);
 
 %% Calculating the means and error bars for each age bin
 
@@ -53,7 +52,6 @@ plot_figure_5a
         xticks([1:N])
         xticklabels({'25' '39' '53' '67' '81'})
         
-        %title(strcat(method,', ', string(num_regions), ' regions'))
         %title(strcat(string(num_regions), ' regions'))
         ylabel('\Lambda')
         xlabel('Ages')
