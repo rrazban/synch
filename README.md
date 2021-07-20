@@ -12,4 +12,4 @@ To run the MATLAB scripts,
 Scripts are partitioned based on the dataset they analyze. Further details on which figures in the paper the respective script reproduces can be found in comments at the top of the script.
 
 ---
-Acknowledgements: initial version of scripts written by Corey Weistuch; Botond Antal preprocessed the fmri data
+Acknowledgements: initial version of scripts written by Corey Weistuch; Botond Antal preprocessed the fMRI data
